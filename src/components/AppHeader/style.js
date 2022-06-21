@@ -3,9 +3,12 @@ import colors from '../../configs/colors';
 
 export default StyleSheet.create({
   container: {
-    padding: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 8,
     flexDirection: 'row',
     alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'gray',
   },
   title: {
     color: colors.primary,
@@ -13,4 +16,5 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  image: {width: 72, height: 62},
 });

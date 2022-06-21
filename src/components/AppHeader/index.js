@@ -1,13 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Image, Text, View} from 'react-native';
 import colors from '../../configs/colors';
 import style from './style';
 
 const AppHeader = () => {
   return (
     <View style={style.container}>
-      <Icon name="ticket-alt" size={46} color={colors.primary} />
+      <Image
+        source={require('../../assets/ticket.png')}
+        style={style.image}
+        color={colors.primary}
+      />
       <Text style={style.title}>{'Movie App'}</Text>
     </View>
   );

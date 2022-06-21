@@ -6,6 +6,7 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     paddingBottom: 80,
+    paddingTop: 16,
   },
   mediumCard: {
     marginTop: 16,

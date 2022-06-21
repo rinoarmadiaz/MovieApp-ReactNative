@@ -4,7 +4,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screen/Home';
 import Bookmark from '../screen/Bookmark';
 import MovieDetail from '../screen/MovieDetail';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Image} from 'react-native';
+import styles from './styles';
 
 const StackNavigator = createNativeStackNavigator();
 
@@ -13,17 +14,19 @@ const BottomTab = createBottomTabNavigator();
 const BottomTabContainer = () => (
   <BottomTab.Navigator
     screenOptions={({route}) => ({
-      tabBarIcon: ({color, size}) => {
+      tabBarIcon: ({size, focused}) => {
         let iconName;
 
         if (route.name === 'Home') {
-          iconName = 'film';
+          iconName = focused
+            ? require('../assets/movie-active.png')
+            : require('../assets/movie-inactive.png');
         } else if (route.name === 'Bookmark') {
-          iconName = 'bookmark';
+          iconName = focused
+            ? require('../assets/bookmark-active.png')
+            : require('../assets/bookmark-inactive.png');
         }
-
-        // You can return any component that you like here!
-        return <Icon name={iconName} size={size} color={color} />;
+        return <Image source={iconName} style={styles.icon} />;
       },
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'gray',
