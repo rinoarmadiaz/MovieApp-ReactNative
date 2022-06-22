@@ -22,7 +22,7 @@ const ListCard = props => {
 
   return (
     <View>
-      <Text style={style.title}>Your Bookmark</Text>
+      <Text style={style.title}>{'Your Bookmark'}</Text>
       <FlatList
         contentContainerStyle={style.flatListContainer}
         data={props.data}

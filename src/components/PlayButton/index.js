@@ -1,6 +1,5 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Image, TouchableOpacity} from 'react-native';
 import style from './style';
 
 const PlayButton = props => {
@@ -8,7 +7,11 @@ const PlayButton = props => {
     <TouchableOpacity
       style={[style.container, props.style]}
       onPress={props.onPress}>
-      <Icon size={32} name={'youtube'} />
+      <Image
+        source={require('../../assets/youtube.png')}
+        style={style.icon}
+        name={'youtube'}
+      />
     </TouchableOpacity>
   );
 };

@@ -17,7 +17,7 @@ const Bookmark = props => {
             setBookmarkedMovies(JSON.parse(data));
           }
         })
-        .catch(error => 'failed to get data :' + error);
+        .catch(error => console.log('failed to get data :' + error));
     }, []),
   );
 

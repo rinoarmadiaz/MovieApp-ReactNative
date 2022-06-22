@@ -7,4 +7,5 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  icon: {width: 32, height: 32},
 });

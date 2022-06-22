@@ -24,29 +24,41 @@ const MovieDetail = props => {
   };
 
   const bookmark = () => {
+    // Getting bookmark item
     AsyncStorage.getItem('bookmark')
       .then(data => {
+        // Parsing the value into JSON, since AsyncStorage data need to be a string
         const parsedData = JSON.parse(data);
         console.log('parsedData', parsedData);
+        // Checking if there is any data
         if (parsedData?.length > 0) {
+          // Grabbing the result by movie id
           const result = parsedData.find(item => item.id === movieDetail.id);
           console.log('result', result);
+          // If the result is empty, then we can assume the movie hasn't bookmarked yet
           if (result === undefined) {
+            // Trying to add the data (bookmark)
             parsedData.push(movieDetail);
+            // Saving the data to the AsyncStorage,
+            // We're using stringify to convert the object into string so it can be saved
             AsyncStorage.setItem('bookmark', JSON.stringify(parsedData))
               .then(_ => setIsBookmarked(true))
               .catch(error => console.log('failed to bookmark 1', error));
             console.log('saving bookmark');
           } else {
+            // If data is exist, then we want to remove the bookmark
             console.log('data already exist, removing bookmark');
+            // Getting the new data by using filter, excluding the movie by movie id
             const newData = parsedData.filter(
               item => item.id !== movieDetail.id,
             );
+            // Saving the data to the AsyncStorage,
             AsyncStorage.setItem('bookmark', JSON.stringify(newData))
               .then(_ => setIsBookmarked(false))
               .catch(error => console.log('failed to bookmark 1', error));
           }
         } else {
+          // If there's no data whatsoever, we 're trying to save it without needing to get any data
           AsyncStorage.setItem('bookmark', JSON.stringify([movieDetail]))
             .then(_ => setIsBookmarked(true))
             .catch(error => console.log('failed to bookmark 2', error));
