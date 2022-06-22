@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {SafeAreaView, ScrollView, Text, TouchableOpacity} from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import BannerCard from '../../components/BannerCard';
 import MediumCard from '../../components/MediumCard';
 import style from './style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = props => {
   const [mostPopular, setMostPopular] = useState([]);
@@ -14,6 +15,18 @@ const Home = props => {
     props.navigation.navigate('MovieDetail', {
       movieDetail: item,
     });
+  };
+
+  const logout = () => {
+    AsyncStorage.removeItem('isLoggedIn')
+      .then(() => {
+        console.log('success logout');
+        props.navigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
+      })
+      .catch(error => alert('logout gagal' + error));
   };
 
   useEffect(() => {
@@ -44,6 +57,13 @@ const Home = props => {
           style={style.mediumCard}
           onPress={openMovieDetail}
         />
+        <TouchableOpacity
+          style={style.button}
+          onPress={() => {
+            logout();
+          }}>
+          <Text style={style.buttonText}>{'Logout'}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

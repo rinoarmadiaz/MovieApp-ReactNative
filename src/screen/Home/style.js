@@ -11,4 +11,17 @@ export default StyleSheet.create({
   mediumCard: {
     marginTop: 16,
   },
+  button: {
+    alignItems: 'center',
+    backgroundColor: 'tomato',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 24,
+    marginHorizontal: 24,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 16,
+  },
 });

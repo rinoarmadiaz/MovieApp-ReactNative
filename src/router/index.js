@@ -6,6 +6,8 @@ import Bookmark from '../screen/Bookmark';
 import MovieDetail from '../screen/MovieDetail';
 import {Image} from 'react-native';
 import styles from './styles';
+import SplashScreen from '../screen/SplashScreen';
+import Login from '../screen/Login';
 
 const StackNavigator = createNativeStackNavigator();
 
@@ -55,6 +57,11 @@ export default () => (
   <StackNavigator.Navigator>
     <StackNavigator.Screen
       options={{headerShown: false}}
+      name={'SplashScreen'}
+      component={SplashScreen}
+    />
+    <StackNavigator.Screen
+      options={{headerShown: false}}
       name={'BottomTab'}
       component={BottomTabContainer}
     />
@@ -62,6 +69,11 @@ export default () => (
       options={{headerShown: false}}
       name={'MovieDetail'}
       component={MovieDetail}
+    />
+    <StackNavigator.Screen
+      options={{headerShown: false}}
+      name={'Login'}
+      component={Login}
     />
   </StackNavigator.Navigator>
 );
