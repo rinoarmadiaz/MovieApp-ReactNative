@@ -1,12 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, TextInput} from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import ListCard from '../../components/ListCard';
+import style from './style';
 
 const Bookmark = props => {
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
+  const [fullBookmarkedMovies, setFullBookmarkedMovies] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -15,6 +17,7 @@ const Bookmark = props => {
           if (data !== null || data !== undefined) {
             console.log('data', data);
             setBookmarkedMovies(JSON.parse(data));
+            setFullBookmarkedMovies(JSON.parse(data));
           }
         })
         .catch(error => console.log('failed to get data :' + error));
@@ -28,10 +31,40 @@ const Bookmark = props => {
     });
   };
 
+  const onSearch = text => {
+    console.log('text to search', text);
+    if (text === '') {
+      // restore the search
+      AsyncStorage.getItem('bookmark')
+        .then(data => {
+          if (data !== null || data !== undefined) {
+            console.log('data', data);
+            setBookmarkedMovies(JSON.parse(data));
+            setFullBookmarkedMovies(JSON.parse(data));
+          }
+        })
+        .catch(error => console.log('failed to get data :' + error));
+    } else {
+      // try to search
+      const searchedData = [];
+      fullBookmarkedMovies.forEach(item => {
+        if (item.title.toLowerCase().includes(text)) {
+          searchedData.push(item);
+        }
+      });
+      setBookmarkedMovies(searchedData);
+    }
+  };
+
   return (
     <SafeAreaView>
       <AppHeader />
-      <ListCard data={bookmarkedMovies} onPress={openMovieDetail} />
+      <TextInput style={style.textInput} placeholder={'Search Bookmark'} />
+      <ListCard
+        onSearch={onSearch}
+        data={bookmarkedMovies}
+        onPress={openMovieDetail}
+      />
     </SafeAreaView>
   );
 };
