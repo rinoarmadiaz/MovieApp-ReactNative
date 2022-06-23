@@ -34,14 +34,6 @@ const Home = props => {
       .then(response => response.json())
       .then(data => {
         setTop250(data);
-      })
-      .catch(error => console.log('error', error));
-  }, []);
-
-  useEffect(() => {
-    fetch('https://62a809c7a89585c1770b4c56.mockapi.io/TopMovies')
-      .then(response => response.json())
-      .then(data => {
         setMostPopular(data);
       })
       .catch(error => console.log('error', error));
