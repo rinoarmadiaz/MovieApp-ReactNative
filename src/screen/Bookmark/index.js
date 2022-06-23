@@ -59,12 +59,12 @@ const Bookmark = props => {
   return (
     <SafeAreaView>
       <AppHeader />
-      <TextInput style={style.textInput} placeholder={'Search Bookmark'} />
-      <ListCard
-        onSearch={onSearch}
-        data={bookmarkedMovies}
-        onPress={openMovieDetail}
+      <TextInput
+        style={style.textInput}
+        placeholder={'Search Bookmark'}
+        onChangeText={text => onSearch(text)}
       />
+      <ListCard data={bookmarkedMovies} onPress={openMovieDetail} />
     </SafeAreaView>
   );
 };
